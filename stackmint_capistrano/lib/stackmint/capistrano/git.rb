@@ -9,6 +9,7 @@ configuration.load do
 
   def add_domain_to_known_hosts(hostname, port=22)
     ip_address = "`dig +short A #{hostname}`"
+    ip_address = %Q{`dig +short A #{hostname} | tr "\\n" "," | sed 's/,$//'`}
     run_as_user user, "ssh-keygen -R #{hostname}"
     run_as_user user, "ssh-keygen -R #{ip_address}"
     run_as_user user, "ssh-keygen -R #{hostname},#{ip_address}"
