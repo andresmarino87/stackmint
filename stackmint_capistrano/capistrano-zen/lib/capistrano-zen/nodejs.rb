@@ -10,9 +10,8 @@ configuration.load do
     # Reference
     # https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
     task :install, roles: :app do
-      run "#{sudo} add-apt-repository ppa:chris-lea/node.js"
-      run "#{sudo} apt-get -y update"
-      run "#{sudo} apt-get -y install nodejs npm"
+      run "#{sudo} curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -"
+      run "#{sudo} apt-get install nodejs"
     end
   end
 end
